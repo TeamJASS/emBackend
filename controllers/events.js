@@ -1,3 +1,5 @@
+import { eventModel } from "../models/events.js";
+
 
 export const getEvents = async (req, res,next) => {
     try {
@@ -8,7 +10,6 @@ export const getEvents = async (req, res,next) => {
     }
 };
 
-
 export const postEvent = async (req, res,next) => {
     try {
         const newEvent = await eventModel.create(req.body)
@@ -17,7 +18,6 @@ export const postEvent = async (req, res,next) => {
         next(error);
     }
 };
-
 
 export const getEvent =  (req, res,next) => {
     try {
