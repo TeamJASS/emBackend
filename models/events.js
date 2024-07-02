@@ -1,19 +1,17 @@
-import { model, Schema } from "mogoose";
-// import { toJSON } from "@reis/mongoose-to-json"
+import { model, Schema } from "mongoose";
+import { toJSON } from "@reis/mongoose-to-json"
 
 const eventSchema = new Schema(
-  {
-    name: { type: String, unique: true, required: true },
-    price: { type: String, required: true },
-    location: { type: String, enum: ['Point'], required: true },
-      coordinates: {type: [Number], required: true },
-      flierURL: { type: String, required: true }
-    },{
+    {
+        name: { type: String, unique: true, required: true },
+        price: { type: String, required: true },
+        location: { type: String, required: true },
+        flierURL: { type: String, required: true }
+    }, {
     timestamps: true,
-  }
+}
 );
 
-//comment
-// eventSchema.plugin(to JSON);
+eventSchema.plugin(toJSON);
 
-export const eventModel  = model('Event',eventSchema);
+export const eventModel = model('Event', eventSchema);

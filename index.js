@@ -1,7 +1,18 @@
 import express from "express"
+import eventRouter from "./routes/events.js";
+import mongoose from "mongoose";
+import 'dotenv/config'
 
-const app =express();
+await mongoose.connect(process.env.MONGO_URI)
 
-app.listen(8080,(req,res)=>{
+const app = express();
+
+app.use(express.json());
+
+app.use(eventRouter);
+
+
+
+app.listen(8080, (req, res) => {
     console.log('Listening on Port 8080');
 });
