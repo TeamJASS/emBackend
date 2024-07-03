@@ -10,14 +10,27 @@ export const getEvents = async (req, res,next) => {
     }
 };
 
-export const postEvent = async (req, res,next) => {
-    try {
-        const newEvent = await eventModel.create(req.body)
-        res.status(200).json(newEvent);
-    } catch (error) {
-        next(error);
-    }
-};
+// export const postEvent = async (req, res,next) => {
+//     try {
+//         const newEvent = await eventModel.create(req.body)
+//         res.status(201).json(newEvent);
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
+export const postEvent= async (req,res,next)=>{
+   try {
+     const newEvent =await eventModel.create({
+         ...req.body,
+         image:req.file.filename
+     });
+     res.status(201).json(newEvent)
+   } catch (error) {
+    next(error);
+   }
+
+}
 
 export const getEvent =  async (req, res,next) => {
     try {
@@ -42,7 +55,7 @@ export const patchEvent = async (req, res,next) => {
     try {
         // const subject = req.body.articleSubject
         const updatedEvent = await eventModel.findByIdAndUpdate(req.params.id, req.body,{new:true})
-        res.status(200).json(updatedEvent)
+        res.status(201).json(updatedEvent)
 
     } catch (error) {
         next(error);
