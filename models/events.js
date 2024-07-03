@@ -3,10 +3,11 @@ import { toJSON } from "@reis/mongoose-to-json"
 
 const eventSchema = new Schema(
     {
-        name: { type: String, unique: true, required: true },
-        price: { type: String, required: true },
-        location: { type: String, required: true },
-        flierURL: { type: String, required: true }
+        name: { type: String, unique: true },
+        price: { type: String },
+        location: { type: String },
+        flierURL: { type: String },
+        date:{type :Date}
     }, {
     timestamps: true,
 }
