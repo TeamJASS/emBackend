@@ -1,6 +1,5 @@
 import { eventModel } from "../models/events.js";
 
-import { json } from "express";
 export const getEvents = async (req, res, next) => {
     try {
      
@@ -10,9 +9,10 @@ export const getEvents = async (req, res, next) => {
         .find(JSON.parse(filter))
         .select(JSON.parse(fields))
         .limit(limit)
-        .skip(skip);
+        .skip(skip)
        
        res.status(200).json(allEvents);
+       console.log(allEvents)
     } catch (error) {
         next(error);
     }
