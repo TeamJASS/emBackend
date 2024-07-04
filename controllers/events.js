@@ -1,23 +1,22 @@
 import { eventModel } from "../models/events.js";
 
-
-export const getEvents = async (req, res,next) => {
+import { json } from "express";
+export const getEvents = async (req, res, next) => {
     try {
-        const allEvents = await eventModel.find();
-        res.status(200).json(allEvents);
-    } catch(error) {
+     
+        const { limit =10, skip=0, filter="{}", fields="{}" } = req.query;
+
+        const allEvents = await eventModel
+        .find(JSON.parse(filter))
+        .select(JSON.parse(fields))
+        .limit(limit)
+        .skip(skip);
+       
+       res.status(200).json(allEvents);
+    } catch (error) {
         next(error);
     }
-};
-
-// export const postEvent = async (req, res,next) => {
-//     try {
-//         const newEvent = await eventModel.create(req.body)
-//         res.status(201).json(newEvent);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+}
 
 export const postEvent= async (req,res,next)=>{
    try {
@@ -43,7 +42,7 @@ export const getEvent =  async (req, res,next) => {
 
 export const deleteEvent = async (req, res,next) => {
     try {
-        const deleteEvent = await articleModel.findByIdAndDelete(req.params.id)
+        const deleteEvent = await eventModel.findByIdAndDelete(req.params.id)
         res.status(200).json(deleteEvent);
     } catch (error) {
         next(error);

@@ -13,7 +13,7 @@ const eventSchema = new Schema(
         price: { type: String },
         location: { type: String },
         image: { type: String ,required:true},
-        organizer:{type:String},
+    
         
     
     }, {
