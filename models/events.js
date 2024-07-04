@@ -7,11 +7,11 @@ const eventSchema = new Schema(
     description: { type: String },
     date: { type: Date },
     time: { type: String },
-    category: {
+    genre: {
       type: String,
       enum: ["Amapiano", "Gospel", "Reggae", "Dancehall", "Pop", "R&B"],
     },
-    genre: {
+    category: {
       type: String,
       enum: [
         "Clubbing",
