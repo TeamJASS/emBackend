@@ -12,10 +12,7 @@ const eventSchema = new Schema(
        ]},
         price: { type: String },
         location: { type: String },
-        image: { type: String ,required:true},
-    
-        
-    
+        image: { type: String ,required:true}  
     }, {
     timestamps: true,
 }
