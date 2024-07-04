@@ -4,7 +4,7 @@ import { toJSON } from "@reis/mongoose-to-json"
 const eventSchema = new Schema(
     {
         name: { type: String, unique: true },
-        description:{type:Date},
+        description:{type:String},
         date:{type:Date},
         time:{type:String},
         genre:{type:String,enum:["Amapiano","Gospel","Reggae","Dancehall","Pop","R&B"]},
