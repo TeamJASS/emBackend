@@ -3,13 +3,22 @@ import { eventModel } from "../models/events.js";
 import { json } from "express";
 export const getEvents = async (req, res, next) => {
     try {
-        const { skip=0, filter="{}", fields="{}", limit=10, ...rest } = req.query;
+        const { skip=0, filter="{}", fields="{}", limit, ...rest } = req.query;
 
-        let query = eventModel
+        let query;
+        if(limit){
+            query = eventModel
             .find(JSON.parse(filter))
             .select(JSON.parse(fields))
             .limit(limit)
             .skip(skip);
+        }else{
+            query = eventModel
+            .find(JSON.parse(filter))
+            .select(JSON.parse(fields))
+            .limit(limit)
+            .skip(skip);
+        }
 
         // Conditionally add limit to the query if it is defined
         // if (limit) {
