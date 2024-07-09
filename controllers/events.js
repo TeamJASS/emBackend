@@ -4,7 +4,7 @@ import { json } from "express";
 export const getEvents = async (req, res, next) => {
     try {
      
-        const { limit =10, skip=0, filter="{}", fields="{}" } = req.query;
+        const { limit =10, skip=0, filter="{}", fields="{}", ... } = req.query;
 
         const allEvents = await eventModel
         .find(JSON.parse(filter))
