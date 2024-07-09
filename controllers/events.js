@@ -3,17 +3,18 @@ import { eventModel } from "../models/events.js";
 import { json } from "express";
 export const getEvents = async (req, res, next) => {
     try {
-        const { skip=0, filter="{}", fields="{}", limit, ...rest } = req.query;
+        const { skip=0, filter="{}", fields="{}", limit=10, ...rest } = req.query;
 
         let query = eventModel
             .find(JSON.parse(filter))
             .select(JSON.parse(fields))
+            .limit(limit)
             .skip(skip);
 
         // Conditionally add limit to the query if it is defined
-        if (limit) {
-            query = query.limit(parseInt(limit, 10)); // Ensure limit is an integer
-        }
+        // if (limit) {
+        //     query = query.limit(parseInt(limit, 10)); // Ensure limit is an integer
+        // }
 
         const allEvents = await query;
 
